@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./Repopattern.js"></script>
+    <script>
+
+        function createRow(emp) {
+            let row = document.createElement("tr");
+            row.innerHTML = `<td>${emp.empId}</td>
+            <td>${emp.empName}</td>
+            <td>${emp.empAddress}</td>
+            <td>${emp.empSalary}</td>
+            `;
+            return row;
+        }
+        function populate() {
+            const table = document.querySelector("#tblRecords");
+            const firstRow = document.querySelector("#theading");
+            table.innerHTML = "";
+            table.appendChild(firstRow);
+            for (const emp of data) {
+                let row = createRow(emp);
+                table.appendChild(row);
+            }
+        }
+        window.addEventListener("load", function () {
+            populate();
+        })
+        
+        function onEdit() {
+            const id = prompt("Enter the ID of the Employee to Edit");
+            try {
+                const foundRec = instance.getEmployee(id)
+                document.getElementById("txtId").value = foundRec.empId;
+                document.getElementById("txtName").value = foundRec.empName;
+                document.getElementById("txtAddress").value = foundRec.empAddress;
+                document.getElementById("txtSalary").value = foundRec.empSalary;
+            } catch (ex) {
+                alert(ex);
+            }
+        }
+
+        function onSaveChanges() {
+            const id = parseInt(document.getElementById("txtId").value);
+            const name = document.getElementById("txtName").value;
+            const address = document.getElementById("txtAddress").value;
+            const salary = parseFloat(document.getElementById("txtSalary").value);
+
+            const emp = new Employee(id, name, address, salary);
+            try {
+                instance.updateEmployee(emp);
+                populate();
+            } catch (error) {
+                alert(error)
+            }
+        }
+
+        function inAdd(){
+            
+            const newId = document.getElementById("newtxtId").value
+            const newName = document.getElementById("newtxtName").value
+            const newAddress = document.getElementById("newtxtAddress").value
+            const newSalary = document.getElementById("newtxtSalary").value
+
+            const emp = new Employee(newId, newName, newAddress, newSalary);
+
+            try {
+                instance.addEmployee(emp);
+                populate();
+            } catch (error) {
+                alert(error)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Employee Monitoring System</h1>
+    <hr>
+    <nav style="padding: 1%;">
+        <a href="#" onclick="inAdd()">Add Record</a>
+        <a href="#" onclick="onEdit()">Edit Record</a>
+        <a href="#" onclick="onDelete()">Delete Record</a>
+    </nav>
+    <hr>
+    <div>
+        <h2>List of Employees</h2>
+        <table id="tblRecords" border="1">
+            <tr id="theading">
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Employee Address</th>
+                <th>Employee Salary</th>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <h2>Details of the Employee</h2>
+        <p>
+            Employee ID:
+            <input id="txtId" readonly type="number">
+        </p>
+        <p>
+            Employee Name:
+            <input type="text" id="txtName">
+        </p>
+        <p>
+            Employee Address:
+            <input type="text" id="txtAddress">
+        </p>
+        <p>
+            Employee Salary:
+            <input type="text" id="txtSalary">
+        </p>
+        <p>
+            <input type="button" value="Save Changes" onclick="onSaveChanges()">
+        </p>
+    </div>
+    <hr>
+    <div>
+        <h2>Add Employee</h2>
+        <p>
+            Employee ID:
+            <input type="text" id="newtxtId">
+        </p>
+        <p>
+            Employee Name:
+            <input type="text" id="newtxtName">
+        </p>
+        <p>
+            Employee Address:
+            <input type="text" id="newtxtAddress">
+        </p>
+        <p>
+            Employee Salary:
+            <input type="text" id="newtxtSalary">
+        </p>
+        <p>
+            <input type="button" value="Add" onclick="inAdd()">
+        </p>
+    </div>
+</body>
+
+</html>

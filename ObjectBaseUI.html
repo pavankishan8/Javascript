@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script src="./ObjectBase.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+            document.getElementById("empid").value = empObj.empId;
+            document.getElementById("empname").value = empObj.empName;
+            document.getElementById("empaddress").value = empObj.empAddress;
+            document.getElementById("empsalary").value = empObj.empSalary;
+
+            document.getElementById("id").value = obj.id;
+            document.getElementById("name").value = obj.name;
+            document.getElementById("address").value = obj.address;
+            document.getElementById("salary").value = obj.salary;
+        })
+
+        //load is an event triggered when the document is loaded into the browser.
+    </script>
+
+   <h1>Objesct Based Programming using JS</h1>
+
+   <hr>
+
+   <div>
+        <p><input type="text" id="empid" placeholder="ID"></p>
+        <p><input type="text" id="empname" placeholder="Name"></p>
+        <p><input type="text" id="empaddress" placeholder="Address"></p>
+        <p><input type="text" id="empsalary" placeholder="Salary"></p>
+        <p>
+            <button>Save Changes</button>
+            <button>Clear</button>
+   </div>
+
+   <hr>
+
+   <div>
+    <p><input type="text" id="id" placeholder="ID"></p>
+    <p><input type="text" id="name" placeholder="Name"></p>
+    <p><input type="text" id="address" placeholder="Address"></p>
+    <p><input type="text" id="salary" placeholder="Salary"></p>
+    <p>
+        <button>Save Changes</button>
+        <button>Clear</button>
+</div>
+
+</body>
+
+    <footer style="text-align: center;">&copy;Pavan Kishan 2022</footer> 
+    <footer style="text-align: center;">&copy;Starmark Software Ltd.</footer>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Local Storage</title>
+    
+    <script>
+        function onSave() {
+            if (!localStorage) {
+                alert("Please upgrade UR Browser with HTML5 features!!");
+                return;
+            }
+            
+            const value = document.getElementById("txtData").value;
+            localStorage.setItem("someName", value);
+            alert("Text is Saved");
+        }
+
+        function onRetrieveData() {
+            if (localStorage.getItem("someName") == null) {
+                alert("No data is set!!!");
+                return;
+            }
+            document.getElementById("pDisplay").innerText = localStorage.getItem("someName");
+
+            if (localStorage.getItem("empRecord") == null) {
+                alert("No data is set!!!");
+                return;
+            }
+            document.getElementById("pDisplay").innerText = localStorage.getItem("empRecord");
+        }
+
+        function onSaveChanges() {
+            const emp = {};
+            emp.empId = document.getElementById("txtId").value;
+            emp.empName = document.getElementById("txtName").value;
+            emp.empAddress = document.getElementById("txtAddress").value;
+            emp.empSalary = document.getElementById("txtSalary").value;
+            const jsonData = JSON.stringify(emp);
+            localStorage.setItem("empRecord", jsonData);
+        }
+    </script>
+    </head>
+    
+    <body>
+        <h1 style="text-align: center;">Local Storage</h1>
+        <hr>
+        <div style="text-align: center;">
+            <p>
+                Enter the Text to Store:
+                <input type="text" id="txtData" />
+                <button onclick="onSave()">Save</button>
+            </p>
+            <div>
+                <button onclick="onRetrieveData()">Click Here to view the Saved Data</button>
+                <p id="pDisplay"></p>
+            </div>
+        </div>
+
+        <div>
+            <h2>Details of the Employee</h2>
+            <p>Employee ID:
+                <input type="number" id="txtId">
+            </p>
+            <p>Employee Name:
+                <input type="text" id="txtName">
+            </p>
+            <p>Employee Address:
+                <input type="text" id="txtAddress">
+            </p>
+            <p>Employee Salary:
+                <input type="number" id="txtSalary">
+            </p>
+            <p>
+                <input type="button" value="Save Changes" onclick="onSaveChanges()">
+            </p>
+            <div>
+                <button onclick="onRetrieveData()">Click Here to view the Saved Data</button>
+                
+            </div>
+        </div>    
+</body>
+</html>
